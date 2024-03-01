@@ -198,8 +198,19 @@ class FavoritePage extends StatelessWidget {
     }
 
     return ListView(
-            children: appState.favorites.map((m) => Text(m)).toList(),
-             );
-             
+            children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text('You have '
+              '${appState.favorites.length} favorites:'),
+        ),
+        for (var pair in appState.favorites)
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text(pair.asLowerCase),
+          ),
+          ...appState.favorites.map((e) => Text(e.toString())),
+      ],
+    );     
   }
 }
